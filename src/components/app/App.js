@@ -1,25 +1,38 @@
-import logo from '../logo.svg';
 import './App.css';
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import fetchTest from "../../store/testThunk";
+import {getIsLoading, getTest} from "../../store/testSelector";
+import Question from "../question/Question";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const dispatch = useDispatch()
+    const isLoading = useSelector(getIsLoading)
+    const test = useSelector(getTest)
+    useEffect(() => {
+        console.log('dispatch')
+        dispatch(fetchTest())
+    }, [dispatch])
+    if (isLoading) {
+        return (
+            <div>Загрузка ..... </div>
+        )
+    }
+    let questionsList
+    if(test.questions && test.questions.length > 0){
+        questionsList = test.questions.map((question, index) => <Question key={question.id}
+                                                                          question={question} index={index}/>)
+    }
+    console.log(test)
+    return (
+        <div className="App">
+            <header>
+                <h1>Тест</h1>
+                <p>{`id: ${test.id}`}</p>
+            </header>
+            {questionsList}
+        </div>
+    );
 }
 
 export default App;
