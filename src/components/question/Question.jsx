@@ -2,7 +2,6 @@ import React from 'react';
 import Answer from "../answer/Answer";
 
 const Question = ({question, index}) => {
-    console.log(question)
     const answersList = question.answers.map((answer) => <Answer key={answer.id}
                                                                  answer={answer}
                                                                  questionId={question.id}

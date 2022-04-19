@@ -10,7 +10,6 @@ function App() {
     const isLoading = useSelector(getIsLoading)
     const test = useSelector(getTest)
     useEffect(() => {
-        console.log('dispatch')
         dispatch(fetchTest())
     }, [dispatch])
     if (isLoading) {
@@ -23,7 +22,6 @@ function App() {
         questionsList = test.questions.map((question, index) => <Question key={question.id}
                                                                           question={question} index={index}/>)
     }
-    console.log(test)
     return (
         <div className="App">
             <header>
