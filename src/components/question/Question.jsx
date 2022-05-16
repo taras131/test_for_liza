@@ -1,5 +1,4 @@
 import React from 'react';
-import Answer from "../answer/Answer";
 import styles from "./question.module.css"
 
 const Question = ({status, setStatus, answer, setAnswer}) => {

@@ -1,5 +1,5 @@
 import './App.css';
-import {useEffect , useState} from "react";
+import {useState} from "react";
 import Question from "../question/Question";
 import Result from "../result/result";
 
