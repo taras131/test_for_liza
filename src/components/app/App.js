@@ -1,34 +1,26 @@
 import './App.css';
-import {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import fetchTest from "../../store/testThunk";
-import {getIsLoading, getTest} from "../../store/testSelector";
+import {useEffect , useState} from "react";
 import Question from "../question/Question";
+import Result from "../result/result";
 
 function App() {
-    const dispatch = useDispatch()
-    const isLoading = useSelector(getIsLoading)
-    const test = useSelector(getTest)
-    useEffect(() => {
-        dispatch(fetchTest())
-    }, [dispatch])
-    if (isLoading) {
-        return (
-            <div>Загрузка ..... </div>
-        )
-    }
-    let questionsList
-    if(test.questions && test.questions.length > 0){
-        questionsList = test.questions.map((question, index) => <Question key={question.id}
-                                                                          question={question} index={index}/>)
-    }
+    const [status, setStatus] = useState('question')
+    const [answer, setAnswer] = useState(false)
+
     return (
         <div className="App">
             <header>
-                <h1>Тест</h1>
-                <p>{`id: ${test.id}`}</p>
+                <h1>Тест вменяемости</h1>
             </header>
-            {questionsList}
+            {status === 'question' && (
+                <Question status = {status} setStatus={setStatus}
+                          answer = {answer} setAnswer = {setAnswer}/>
+            )}
+            {status === 'result' && (
+                <Result status = {status} setStatus={setStatus}
+                          answer = {answer} setAnswer = {setAnswer}/>
+            )}
+
         </div>
     );
 }

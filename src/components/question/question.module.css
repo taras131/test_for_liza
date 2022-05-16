@@ -1,0 +1,15 @@
+.answer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.button{
+    color: white;
+    background-color: darkslateblue;
+    width: 200px;
+    height: 70px;
+    border-radius: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+}
